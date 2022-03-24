@@ -1,4 +1,4 @@
-# planty-server
+# 🌱 planty-server
 
 ## Getting started
 

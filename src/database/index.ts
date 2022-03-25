@@ -8,6 +8,7 @@ const uri = `mongodb+srv://${process.env.USER_USERNAME}:${process.env.USER_PASSW
 
 const connectDatabase = async (): Promise<Database> => {
   const client = new MongoClient(uri)
+
   try {
     await client.connect()
 

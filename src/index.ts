@@ -1,22 +1,28 @@
 import express, { Application } from 'express'
+import { ApolloServer } from 'apollo-server-express'
 import dotenv from 'dotenv'
 import connectDatabase from './database'
+import { resolvers, typeDefs } from './lib/schema'
 
 dotenv.config()
 
 const mount = async (app: Application) => {
   const db = await connectDatabase()
 
-  app.get('/', (_req, res) => {
-    res.send('Hello World')
+  const server = new ApolloServer({
+    resolvers,
+    typeDefs,
+    context: ({ req, res }) => ({ db, req, res }),
   })
 
-  console.log(db.plants)
+  await server.start()
 
-  app.listen(process.env.PORT)
+  server.applyMiddleware({ app, path: '/' })
 
-  console.log(
-    `🌱 planty app ready to grow some leaves on http://localhost:${process.env.PORT} 🌻`
+  app.listen({ port: process.env.PORT }, () =>
+    console.log(
+      `🌱 planty app ready to grow some leaves on http://localhost:${process.env.PORT}${server.graphqlPath} 🌻`
+    )
   )
 }
 

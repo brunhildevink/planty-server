@@ -1,8 +1,7 @@
-import { merge } from 'lodash'
 import Plants from './Plants'
 
-const resolvers = merge(Plants.resolvers)
+const resolvers = [Plants.resolvers]
 
-const typeDefs = merge(Plants.typeDefs)
+const typeDefs = [Plants.typeDefs]
 
 export { resolvers, typeDefs }

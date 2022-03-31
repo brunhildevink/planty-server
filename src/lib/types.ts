@@ -1,7 +1,7 @@
 import { Collection } from 'mongodb'
 
 export interface Plant {
-  id: string
+  _id: string
   humidity: string
   image: string
   name: string

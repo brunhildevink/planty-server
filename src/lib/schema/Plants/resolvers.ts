@@ -1,30 +1,35 @@
-import { Database } from '../../types'
+/* eslint-disable no-underscore-dangle */
+import { IResolvers } from 'graphql-tools'
+import { Database, Plant } from '../../types'
 import { Data } from './types'
 
-const resolvers = {
+const resolvers: IResolvers = {
   Query: {
     plants: async (
       _root: undefined,
-      { db }: { db: Database }
+      _args: Record<string, unknown>,
+      { db }: { db: Database; req: Request }
     ): Promise<Data> => {
       try {
+        const query = {}
         const data: Data = {
           result: [],
           total: 0,
         }
 
-        let cursor = db.plants.find({})
-
-        cursor = cursor.sort({ scientific_name: 1 })
+        const cursor = db.plants.find(query)
 
         data.result = await cursor.toArray()
-        data.total = await cursor.count()
+        data.total = await db.plants.countDocuments()
 
         return data
       } catch (error) {
-        throw new Error(`Failed to query plants: ${error}`)
+        throw new Error(`Failed to query plants : ${error}`)
       }
     },
+  },
+  Plant: {
+    id: (plant: Plant): string => plant._id.toString(),
   },
 }
 

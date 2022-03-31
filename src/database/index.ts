@@ -1,10 +1,10 @@
 import { MongoClient } from 'mongodb'
 import dotenv from 'dotenv'
-import { Database } from '../lib/types'
+import { Database, Plant } from '../lib/types'
 
 dotenv.config()
 
-const uri = `mongodb+srv://${process.env.USER_USERNAME}:${process.env.USER_PASSWORD}@planty-server.knaj7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
+const uri = `mongodb+srv://${process.env.USER_USERNAME}:${process.env.USER_PASSWORD}@${process.env.CLUSTER}.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
 
 const connectDatabase = async (): Promise<Database> => {
   const client = new MongoClient(uri)
@@ -12,10 +12,10 @@ const connectDatabase = async (): Promise<Database> => {
   try {
     await client.connect()
 
-    const db = client.db('main')
+    const db = client.db('Main')
 
     return {
-      plants: db.collection('test_plants'),
+      plants: db.collection<Plant>('plants'),
     }
   } catch (error) {
     throw new Error(

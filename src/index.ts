@@ -19,6 +19,8 @@ const mount = async (app: Application) => {
 
   server.applyMiddleware({ app, path: '/' })
 
+  app.use(express.json())
+
   app.listen({ port: process.env.PORT }, () =>
     console.log(
       `🌱 planty app ready to grow some leaves on http://localhost:${process.env.PORT}${server.graphqlPath} 🌻`

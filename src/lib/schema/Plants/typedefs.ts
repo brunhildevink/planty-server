@@ -19,7 +19,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    plants: Plants!
+    plants(limit: Int, page: Int): Plants!
   }
 `
 

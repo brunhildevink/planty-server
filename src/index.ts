@@ -2,7 +2,7 @@ import express, { Application } from 'express'
 import { ApolloServer } from 'apollo-server-express'
 import dotenv from 'dotenv'
 import connectDatabase from './database'
-import { resolvers, typeDefs } from './lib/schema'
+import { resolvers, typeDefs } from './graphql/schema'
 
 dotenv.config()
 

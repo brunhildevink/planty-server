@@ -1,6 +1,6 @@
 import { MongoClient, ServerApiVersion } from 'mongodb'
 import dotenv from 'dotenv'
-import { Database } from '../graphql/types'
+import { Database } from '../lib/types'
 
 dotenv.config()
 

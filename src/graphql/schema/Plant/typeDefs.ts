@@ -9,17 +9,18 @@ const typeDefs = gql`
     scientific_name: String!
     soil: String!
     sunlight: String!
-    temperature_in_celsius: String!
+    temperature_in_celsius: String
     water: String!
   }
 
-  type Plants {
+  type PlantCollection {
     result: [Plant!]!
     total: Int!
   }
 
   type Query {
-    plants(limit: Int, page: Int): Plants!
+    plant(id: String!): Plant
+    plants(limit: Int, page: Int): PlantCollection!
   }
 `
 

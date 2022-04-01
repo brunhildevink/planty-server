@@ -1,4 +1,4 @@
 import resolvers from './resolvers'
-import typeDefs from './typedefs'
+import typeDefs from './typeDefs'
 
 export default { resolvers, typeDefs }

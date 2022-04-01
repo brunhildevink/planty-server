@@ -1,7 +1,7 @@
-import Plants from './Plants'
+import Plant from './Plant'
 
-const resolvers = [Plants.resolvers]
+const resolvers = [Plant.resolvers]
 
-const typeDefs = [Plants.typeDefs]
+const typeDefs = [Plant.typeDefs]
 
 export { resolvers, typeDefs }

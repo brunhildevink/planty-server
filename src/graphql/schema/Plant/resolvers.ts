@@ -1,24 +1,38 @@
-import { Database, Plant } from '../../types'
-
-interface Args {
-  limit?: number
-  page?: number
-}
-
-interface Data {
-  result: Plant[]
-  total: number
-}
+import { ObjectId } from 'mongodb'
+import {
+  Database,
+  Plant,
+  PlantArgs,
+  PlantsArgs,
+  PlantsData,
+} from '../../../lib/types'
 
 const resolvers = {
   Query: {
+    plant: async (
+      _root: undefined,
+      { id }: PlantArgs,
+      { db }: { db: Database }
+    ): Promise<Plant> => {
+      try {
+        const cursor = await db.plants.findOne({ _id: new ObjectId(id) })
+
+        if (!cursor) {
+          throw new Error('plant cannot be found')
+        }
+
+        return cursor
+      } catch (error) {
+        throw new Error(`Failed to query plant: ${error}`)
+      }
+    },
     plants: async (
       _root: undefined,
-      { limit, page }: Args,
+      { limit, page }: PlantsArgs,
       { db }: { db: Database }
-    ): Promise<Data> => {
+    ): Promise<PlantsData> => {
       try {
-        const data: Data = {
+        const data: PlantsData = {
           result: [],
           total: 0,
         }

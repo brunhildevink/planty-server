@@ -7,7 +7,9 @@
     "start": "nodemon src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx prettier --write . && eslint . --ext .ts",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "seed": "ts-node lib/temp/seed.ts",
+    "clear": "ts-node lib/temp/clear.ts"
   },
   "author": "",
   "license": "ISC",
